@@ -1,17 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <style>
-      @import "./src/style.css";
-    </style>
-    <title>JSDev</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+      <style>
+        @import "./src/style.css"
+   </style>
+   
+    <title>React App</title>
   </head>
   <body>
-   <div id="root"></div>
+    <div id="emailDOM" style="display: flex; flex-direction: column; width: 95%">
+        <div title="TO" id="toRow" class="gjs-row">
+            <div id="toLabelColumn" class="gjs-label" title="toLabel" style="display: flex; align-items: center;">
+                <button class="bodyButton" id="toButton">TO:</button>
+            </div>
+            <div id="toChips" class="gjs-cell">sdfsd</div>
+        </div>
+        <div title="CC" id="ccRow" class="gjs-row">
+            <div id="ccLabelColumn" class="gjs-label" title="ccLabel" style="display: flex; align-items: center;">
+                <button class="bodyButton" id="ccButton">CC:</button>
+            </div>
+            <div id="ccChips" class="gjs-cell"></div>
+        </div>
+        <div title="BCC" id="bccRow" class="gjs-row">
+            <div id="bccLabelColumn" class="gjs-label" title="bccLabel" style="display: flex; align-items: center;">
+                <button class="bodyButton" id="bccButton" >BCC:</button>
+            </div>
+            <div id="bccChips" class="gjs-cell"></div>
+        </div>
 
-    <script type="module">
-      import "./src/index.js";
-    </script>
+        <!--  SUBJECT BLOCK -->
+        <div id="subjectRow" class="gjs-row" title="subjectBlock" >
+          <div id="subjectLabelColumn" class="gjs-label" style="display: flex; align-items: center;" title="subjectLabel">
+            <div id="subjectLabel" class="bodyButton">Subject:</div>
+          </div>
+          <div id="subjectInputColumn" class="gjs-cell" title="subject" >
+            <input id="subject" class="textWrapper" type="text" name="subjectInput" placeholder="subject" />
+            <hr style="margin-left: 0.5rem; width: 100%" >
+          </div>
+        </div>
+
+        <!--  MESSAGE BLOCK -->
+        <div id="emailMessageRow" class="gjs-row" title="message" >
+          <div id="messagePlaceholderColumn" class="gjs-label" style="display: flex; align-items: top; margin-top: 1rem;">
+            <button id="attachButton" class="bodyButton" onClick = "addFiles()" title="add files" style="display: flex; align-items: center;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-paperclip" viewBox="0 0 16 16">
+                <path d="M4.5 3a2.5 2.5 0 0 1 5 0v9a1.5 1.5 0 0 1-3 0V5a.5.5 0 0 1 1 0v7a.5.5 0 0 0 1 0V3a1.5 1.5 0 1 0-3 0v9a2.5 2.5 0 0 0 5 0V5a.5.5 0 0 1 1 0v7a3.5 3.5 0 1 1-7 0V3z"/>
+              </svg>
+            </button>
+          </div>
+          <div id="messageInputColumn" class="gjs-cell" title="message" style="display: flex;">
+            <textarea class="messageWrapper" id="messageText" placeholder="message" style="display: flex; vertical-align: text-top;"></textarea>
+          </div>
+        </div>
+        <div id="buttonRow" class="gjs-row" title="buttons" >
+          <div id="buttonLabelColumn" class="gjs-label">
+            <div></div>
+          </div>
+          <div id="buttonInputColumn" class="gjs-cell">
+            <button id="button" >Send</button>
+          </div>
+        </div> 
+      </div>
+      <script type="module">
+       import "./src/index.js"
+      </script>
   </body>
 </html>
