@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import Button from "../components/Button";
 
-const EmailTypeAhead = () => {
+const EmailChipper = () => {
   const [value, setValue] = useState("");
   const [emails, setEmails] = useState([]);
   const [error, setError] = useState(null);
@@ -20,15 +20,17 @@ const EmailTypeAhead = () => {
         setValue("");
         e.preventDefault();
       } else if (value && !isValid(value)) {
-        setError("Please enter a valid email address");
+        setError("Please enter a unique & valid email address");
         e.preventDefault();
       }
     }
   };
 
   const handleDelete = (index) => {
-    setEmails(emails.filter((email) => emails.indexOf(email) !== index));
+    console.log("index", index);
+    setEmails(emails.filter((email) => email !== index));
   };
+
   const isInList = (email) => {
     return emails.includes(email);
   };
@@ -59,23 +61,29 @@ const EmailTypeAhead = () => {
   const handlePaste = (e) => {
     e.preventDefault();
     const paste = e.clipboardData.getData("text");
-    const emails = paste.match(/[\w\d\.-]+@[\w\d\.-]+\.[\w\d\.-]+/g);
-    if (emails) {
-      const toBeAdded = emails.filter((email) => !isInList(email));
-      setEmails([...emails, ...toBeAdded]);
-    }
+    //const isValid = isValid(paste);
+    if (isValid(paste)){
+    const newEmails = [];
+    newEmails.push(paste); 
+    const toBeAdded = newEmails.filter((email) => {
+      return !emails.includes(email); 
+    })
+    setEmails([...toBeAdded,...emails]);
+    } else {
+      setError("Please enter a unique & valid email address")
+    };
   };
 
   return (
     <main className="wrapper">
-      {emails.map((email) => (
-        <div className="tag-item" key={email}>
+      {emails.map((email,i) => (
+        <div className="tag-item" key={i}>
           {email}
 
           <button
             type="button"
             className="button"
-            onClick={() => this.handleDelete(email)}
+            onClick={() => handleDelete(email)}
           >
             &times;
           </button>
@@ -96,4 +104,4 @@ const EmailTypeAhead = () => {
   );
 };
 
-export default EmailTypeAhead;
+export default EmailChipper;
