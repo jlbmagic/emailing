@@ -92,12 +92,18 @@ const EmailChipper = () => {
 
       <input
         className="input"
+        list="myList"
         placeholder="Type or paste email and hit 'Enter'"
         value={value}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         onPaste={handlePaste}
       />
+      <datalist id="mylist">
+        <option>mspsi@me.com</option>
+        <option>you@us.org</option>
+        <option>swift@me.com</option>
+      </datalist>
 
       {error && <p className="error">{error}</p>}
     </main>
