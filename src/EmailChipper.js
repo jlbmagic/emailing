@@ -2,18 +2,53 @@ import React, { useState } from "react";
 
 import Button from "../components/Button";
 
+const inputEmails = [
+"mspsi@me.com",
+"swift@us.org",
+"me@you.com"
+];
+
 const EmailChipper = () => {
   const [value, setValue] = useState("");
   const [emails, setEmails] = useState([]);
   const [error, setError] = useState(null);
+  const [suggestions, setSuggestions] = useState([]);
+  const [unchosenEmails, setUnchosenEmails] = useState(inputEmails);
 
   //functionality
   const handleChange = (e) => {
     setValue(e.target.value);
     setError(null);
   };
+  
+  const renderSuggestions = () => {
+    if (suggestions.length === 0) {
+      return null;
+    }
+    return (
+      <ul>
+        {suggestions.map(email => <li key={email} 
+        onClick = {() => {
+          setEmails([...emails, email]);
+          setSuggestions(suggestions.filter((item)=>{
+            return item !== email
+          }))
+        }
+        }
+        >{email}</li>)}
+      </ul>
+    )
+  }
 
   const handleKeyDown = (e) => {
+    const value = e.target.value;
+    if (value.length > 0) {
+      const regex = new RegExp(`^${value}`, `i`);
+      const foundEmails = inputEmails.sort().filter(v => regex.test(v));
+      setSuggestions(foundEmails);
+      setValue("");
+      e.preventDefault();
+    };
     if (e.key === "Enter" || e.key === "Tab" || e.key === ",") {
       if (value && isValid(value)) {
         setEmails([...emails, value]);
@@ -92,18 +127,12 @@ const EmailChipper = () => {
 
       <input
         className="input"
-        list="myList"
         placeholder="Type or paste email and hit 'Enter'"
         value={value}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        onPaste={handlePaste}
-      />
-      <datalist id="mylist">
-        <option>mspsi@me.com</option>
-        <option>you@us.org</option>
-        <option>swift@me.com</option>
-      </datalist>
+        onPaste={handlePaste}/>
+      {renderSuggestions()}
 
       {error && <p className="error">{error}</p>}
     </main>
