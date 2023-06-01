@@ -30,9 +30,7 @@ const EmailChipper = () => {
         {suggestions.map(email => <li key={email} 
         onClick = {() => {
           setEmails([...emails, email]);
-          setSuggestions(suggestions.filter((item)=>{
-            return item !== email
-          }))
+          setSuggestions(suggestions.filter((item)=>{return item !== email}))
         }
         }
         >{email}</li>)}
