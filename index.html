@@ -8,10 +8,11 @@
       name="description"
       content="Web site created using create-react-app"
     />
-      <style>
-        @import "./src/style.css"
-   </style>
-   
+    <link rel="stylesheet" href="node_modules/awesomplete/awesomplete.css" />
+    <script src="node_modules/awesomplete/awesomplete.js" async></script>
+    <style>
+      @import "./src/style.css"
+    </style>
     <title>React App</title>
   </head>
   <body>
@@ -20,7 +21,7 @@
             <div id="toLabelColumn" class="gjs-label" title="toLabel" style="display: flex; align-items: center;">
                 <button class="bodyButton" id="toButton">TO:</button>
             </div>
-            <div id="toChips" class="gjs-cell">sdfsd</div>
+            <div id="toChips" class="gjs-cell"></div>
         </div>
         <div title="CC" id="ccRow" class="gjs-row">
             <div id="ccLabelColumn" class="gjs-label" title="ccLabel" style="display: flex; align-items: center;">
